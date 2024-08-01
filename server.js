@@ -22,9 +22,9 @@ const locationRouters = require("./routes/locations");
 const departmentRouters = require("./routes/departments");
 const storeRouters = require("./routes/stores");
 const statusRouters = require("./routes/status");
-const rolesRouters = require("./routes/roles");
 const productRouters = require("./routes/products");
 const authRoutes = require('./routes/auth');
+const roleRoutes = require('./routes/roles');
 
 // ใช้ cors สำหรับการทำ Cross-Origin Resource Sharing
 app.use(cors({ origin: URL, credentials: true }));
@@ -53,9 +53,9 @@ app.use("/locations", locationRouters);
 app.use("/departments", departmentRouters);
 app.use("/stores", storeRouters);
 app.use("/status", statusRouters);
-app.use("/roles", rolesRouters);
 app.use("/products", productRouters);
 app.use('/auth', authRoutes);
+app.use('/roles', roleRoutes);
 
 // รัน server
 app.listen(port, () => {

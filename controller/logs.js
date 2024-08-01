@@ -14,20 +14,27 @@ exports.getLog = (req, res) => {
 }
 
 exports.addLog = (req, res) => {
-  connection.query("INSERT INTO `logs`(`id`, `log`, `date`, `time`, `user_id`) VALUES (?,?,?,?,?)", [req.body.id, req.body.log, req.body.date, req.body.time, req.body.user_id], function (err, results) {
-    res.json(results);
-  });
+  connection.query(
+    "INSERT INTO `logs`(`user_id`, `product_id`, `action`, `description`, `time`) VALUES (?,?,?,?,?)",
+    [req.body.user_id, req.body.product_id, req.body.action, req.body.description, req.body.time],
+    function (err, results) {
+      res.json(results);
+    }
+  );
 }
 
 exports.updateLog = (req, res) => {
-  connection.query("UPDATE `logs` SET `log` = ?, `date` = ?, `time` = ?, `user_id` = ? WHERE id = ?", [req.body.log, req.body.date, req.body.time, req.body.user_id, req.body.id], function (err, results) {
-    res.json(results);
-  });
+  connection.query(
+    "UPDATE `logs` SET `user_id` = ?, `product_id` = ?, `action` = ?, `description` = ?, `time` = ? WHERE `id` = ?",
+    [req.body.user_id, req.body.product_id, req.body.action, req.body.description, req.body.time, req.params.id],
+    function (err, results) {
+      res.json(results);
+    }
+  );
 }
 
 exports.deleteLog = (req, res) => {
-  const logId = req.params.id;
-  connection.query('DELETE FROM `logs` WHERE id = ?', [logId], function (err, results) {
+  connection.query('DELETE FROM `logs` WHERE `id` = ?', [req.params.id], function (err, results) {
     res.json(results);
   });
 }
